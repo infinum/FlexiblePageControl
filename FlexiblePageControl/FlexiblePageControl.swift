@@ -167,20 +167,8 @@ public class FlexiblePageControl: UIView {
 
         let itemConfig = ItemView.ItemConfig(dotSize: config.dotSize, itemSize: itemSize, smallDotSizeRatio: config.smallDotSizeRatio, mediumDotSizeRatio: config.mediumDotSizeRatio)
 
-        if currentPage < displayCount {
-
-            items = (-2..<(displayCount + 2))
-                .map { ItemView(config: itemConfig, index: $0) }
-        }
-        else {
-
-            guard let firstItem = items.first else { return }
-            guard let lastItem = items.last else { return }
-            items = (firstItem.index...lastItem.index)
-                .map { ItemView(config: itemConfig, index: $0) }
-//            items = ((currentPage - displayCount - 2)...(currentPage + 2))
-//                .map { ItemView(itemSize: itemSize, dotSize: config.dotSize, index: $0) }
-        }
+        items = (-2..<(numberOfPages + 2))
+            .map { ItemView(config: itemConfig, index: $0) }
 
         scrollView.contentSize = .init(width: itemSize * CGFloat(numberOfPages), height: itemSize)
 
